@@ -11,7 +11,6 @@
      sessionid:''
  });
  
- 
  (function(){
    $.ajax({
        url:'user/getUser.do',
