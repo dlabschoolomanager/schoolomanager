@@ -1,0 +1,23 @@
+Ext.define('MyApp.model.StudentMarkEntry', {
+   extend: 'Ext.data.Model',
+     fields: [
+        'id', 
+	'classname',
+	'studentid', 
+	'studentname',
+        'examtype',
+        'sessionname',
+	'appeared', 
+	'markobtained',
+        'subjectname',
+        'maxmark',
+        'examname',
+        'passmark',
+	'passstatus', 
+	'createdby', 
+	'createdon', 
+	'modifiedby', 
+	'modifiedon'
+     ]
+});
+

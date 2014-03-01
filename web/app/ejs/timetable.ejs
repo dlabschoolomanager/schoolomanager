@@ -1,0 +1,51 @@
+<div id="timetable">
+<div class="fc-calendar-container">
+    <div class="fc-calendar fc-five-rows">
+        <div class="fc-head">
+            <div>Monday</div>
+            <div>Tuesday</div>
+            <div>Wednesday</div>
+            <div>Thursday</div>
+            <div>Friday</div>
+            <div>Saturday</div>
+            <div>Sunday</div>
+        </div>
+       <div class="fc-body">
+                <% for(var i=0; i<this.length; i++){
+                    var row = this[i]; %>
+                <div class="fc-row">
+                        <div>
+                            <span class="fc-date">7</span>
+                            <span class="fc-weekday">Mon</span>
+                        </div>
+                        <div>
+                            <span class="fc-date">8</span>
+                            <span class="fc-weekday">Tue</span>
+                        </div>
+                        <div>
+                            <span class="fc-date">9</span>
+                            <span class="fc-weekday">Wed</span>
+                        </div>
+                        <div>
+                            <span class="fc-date">10</span>
+                            <span class="fc-weekday">Thu</span>
+                        </div>
+                        <div>
+                            <span class="fc-date">11</span>
+                            <span class="fc-weekday">Fri</span>
+                        </div>
+                        <div>
+                            <span class="fc-date">12</span>
+                            <span class="fc-weekday">Sat</span>
+                        </div>
+                        <div>
+                            <span class="fc-date">13</span>
+                            <span class="fc-weekday">Sun</span>
+                        </div>
+                 </div>
+                 <%}%>
+        </div>
+<div>
+</div>
+
+</div>
