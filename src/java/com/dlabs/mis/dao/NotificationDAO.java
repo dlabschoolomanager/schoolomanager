@@ -13,6 +13,8 @@ import com.dlabs.mis.model.ClassExam;
 import com.dlabs.mis.model.ClassSubject;
 import com.dlabs.mis.model.Classes;
 import com.dlabs.mis.model.CreateExamPostData;
+import com.dlabs.mis.model.User;
+import com.dlabs.session.AuthHandler;
 import com.kjava.base.ReadableException;
 
 import com.kjava.base.db.DaoUtil;
@@ -36,13 +38,13 @@ public class NotificationDAO {
     public Notification addNotification(Connection conn, Notification obj, int i, int i0) throws ReadableException {
               
         try {
-            String query = "insert into notification (id,title,description,recipient,activatedate,endactivatedate,STATUS,createdby,modifiedby,createdon) values(?,?,?,?,?,?,?,?,?,current_date)";
+            String query = "insert into notification (id,sessionid,title,description,recipient,activatedate,endactivatedate,STATUS,createdby,modifiedby,createdon) values(?,?,?,?,?,?,?,?,?,?,current_date)";
             String id = "";
             id = java.util.UUID.randomUUID().toString();
-            obj.setCreatedby("1111");
-            obj.setModifiedby("11111");
+
            if( DaoUtil.executeUpdate(conn, query, new Object[]{
                                                                id,
+                                                               obj.getSessionid(),
                                                                obj.getTitle(),
                                                                obj.getDescription(),
                                                                obj.getRecipient(),

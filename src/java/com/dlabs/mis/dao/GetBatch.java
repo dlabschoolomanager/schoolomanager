@@ -178,4 +178,22 @@ public class GetBatch {
       }   
     return obj;       
   }
+ 
+  public String getBatchId(Connection conn, String studentid , String sessionid) throws ReadableException{
+  
+      String batchid="";
+      String query="SELECT scm.batch_id as batch_id " +
+                   "  FROM student_class_map scm" +
+                   "  JOIN sessions s ON s.batch_id= scm.batch_id AND s.session_id=?" +
+                   " WHERE student_id=? ";
+      ResultSet rs=DaoUtil.executeQuery(conn,query,new Object[]{sessionid ,studentid});
+        try {
+            if(rs!=null && rs.next()){
+                if(rs.getObject("batch_id")!=null)batchid=rs.getString("batch_id");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(GetBatch.class.getName()).log(Level.SEVERE, null, ex);
+        }
+      return batchid;
+  }
 }

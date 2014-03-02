@@ -24,6 +24,15 @@ public class Notification {
    private long   endactivatedate;
    private String modifiedby; 
    private long   modifiedon; 
+   private String sessionid; 
+
+    public String getSessionid() {
+        return sessionid;
+    }
+
+    public void setSessionid(String sessionid) {
+        this.sessionid = sessionid;
+    }
 
     public String getModifiedby() {
         return modifiedby;

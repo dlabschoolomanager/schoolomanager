@@ -1,16 +1,21 @@
 <div class="recent-activity">
 <h3>Recent Activity</h3>
 <%this.each(function(row){%>
-     <div class="comment-div-1"><span class="activity_type activity_type_<%=row.activityType%>">&nbsp;</span><span><%=row.attr('subject')%></span></div>
+     <div class="comment-div-1"><span class="activity_type activity_type_<%=row.activityType%>"><b>Title :</b></span><span><%=row.attr('subject')%></span></div>
      <div style="overflow:hidden;clear:both;">
-        <div class="left post-by-img"><img src="img/<%=row.userid%>.png"></div>
+        <div class="left post-by-img"><img src="img/<%=row.postedby%>.png"></div>
         <div class="left">
-            <div class="comment-div-2"><span><%=row.userName%></span><span><%=new Date(CURRENT_TIME-row.timestamp).getHours()%> hours ago</span><span>(<a href="#">Show more</a>)</span></div>
-            <div><%=row.comment%></div>
+            <div class="comment-div-2"><span><%=row.userName%></span><span><%=new Date(CURRENT_TIME-row.postedon).getHours()%> hours ago</span>
+            <span>(<a href="#">Show more</a>)</span></div>
+            <div><b>Description :</b><%=row.comment%></div>
             <div>
-                reply
+                <a href="#" id="reply" name="<%=row.activityid%>">reply</a>
+                <input id="<%=row.activityid%>_ta" type="textarea" hidden=true></input>
+                <input id="<%=row.activityid%>_btn" type="button" value="Post" hidden=true></input>
             </div>
         </div>
      </div>
+     <hr>
 <%})%>
+
 </div>

@@ -29,7 +29,35 @@ public class AlertDAO {
         if(sessionid.equalsIgnoreCase(""))sessionid=null;
         if(userid.equalsIgnoreCase(""))userid=null;
         
-        String query="SELECT 'Examination' AS m_name,MIN(FROM_UNIXTIME(examdate/1000,'%d-%m-%Y')) AS alert_name ,m.value AS title, examname AS dsc " +
+        String query=getQuery();
+        String countquery=getCountQuery();
+        
+        if(sessionid!=null && userid!=null){
+        
+        if(batchobj.roleId(conn, userid)==4){    
+          String studentid=batchobj.getStudentIdOfParent(conn,userid);  
+          String batchid=batchobj.getBatchidForStudent(conn,sessionid,studentid);  
+          
+          int count =0;        
+        try{
+            ResultSet rs = DaoUtil.executeQuery(conn,countquery,new Object[]{batchid,studentid,batchid,batchid,studentid,batchid,studentid});
+            if(rs.next()) {
+                count = rs.getInt("count");
+            }
+            rs = DaoUtil.executeQuery(conn,query,new Object[]{batchid,studentid,batchid,batchid,studentid,batchid,studentid});
+            job = jsonUtil.getJsonObject(rs, count, 1,15, false);
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(MasterDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        }    
+        }
+       return job; 
+    }
+    
+    public String getQuery(){
+    
+              String query="SELECT 'Examination' AS m_name,MIN(FROM_UNIXTIME(examdate/1000,'%d-%m-%Y')) AS alert_name ,m.value AS title, examname AS dsc " +
                     "  FROM classexam c " +
                     "  JOIN MASTER m ON c.examtypeid=m.id " +
                     " WHERE batch_id=? " +
@@ -64,7 +92,12 @@ public class AlertDAO {
                     "   AND student_id=?" +
                     "   AND paid_status=0 ";
 
-        String countquery="select count(1) as count from (SELECT 'Examination' AS m_name,MIN(FROM_UNIXTIME(examdate/1000,'%d-%m-%Y')) AS alert_name ,m.value AS title, examname AS dsc " +
+     
+      return query;
+    }
+    public String getCountQuery(){
+    
+       return "select count(1) as count from (SELECT 'Examination' AS m_name,MIN(FROM_UNIXTIME(examdate/1000,'%d-%m-%Y')) AS alert_name ,m.value AS title, examname AS dsc " +
                     "  FROM classexam c " +
                     "  JOIN MASTER m ON c.examtypeid=m.id " +
                     " WHERE batch_id=? " +
@@ -98,29 +131,6 @@ public class AlertDAO {
                     " WHERE class_id=?"  +
                     "   AND student_id=?" +
                     "   AND paid_status=0 ) data1 ";
-        
-        
-        if(sessionid!=null && userid!=null){
-        
-        if(batchobj.roleId(conn, userid)==4){    
-          String studentid=batchobj.getStudentIdOfParent(conn,userid);  
-          String batchid=batchobj.getBatchidForStudent(conn,sessionid,studentid);  
-          
-          int count =0;        
-        try{
-            ResultSet rs = DaoUtil.executeQuery(conn,countquery,new Object[]{batchid,studentid,batchid,batchid,studentid,batchid,studentid});
-            if(rs.next()) {
-                count = rs.getInt("count");
-            }
-            rs = DaoUtil.executeQuery(conn,query,new Object[]{batchid,studentid,batchid,batchid,studentid,batchid,studentid});
-            job = jsonUtil.getJsonObject(rs, count, 1,15, false);
-        }
-        catch (SQLException ex) {
-            Logger.getLogger(MasterDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        }    
-        }
-       return job; 
+       
     }
-    
 }

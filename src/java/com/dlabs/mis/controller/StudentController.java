@@ -245,29 +245,7 @@ public class StudentController {
         }
         return ""; 
      }
-    /**
-     * this service is used to get recent updates
-     * of student of logged in parent
-     * 
-     */
-    @RequestMapping(value=URLMap.GET_PARENT_RECENT_UPDATES, method= RequestMethod.GET)
-    @ResponseBody
-    public List<StudentActivity> getRecentUpdatesOfParent(HttpServletRequest req){
-       Paging page = Paging.getInstance(req);
-       String res = "";
-        try{
-            conn = DbPool.getConnection();
-            User user= AuthHandler.getUser(req);
-            String studentId = (String) user.getProperties().get("studentid");
-            return studentDAO.getRecentUpdates(conn,studentId,page,false);
-        }
-        catch(Exception ex){
-            
-        }finally{
-            DbPool.close(conn);
-        }
-        return null; 
-     }
+    
 }   
 
 

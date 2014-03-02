@@ -11,13 +11,14 @@
      sessionid:''
  });
  
+ 
  (function(){
    $.ajax({
        url:'user/getUser.do',
        dataType:'json',
         success : function(response){
             loadStudentProfile(response.properties.studentid);
-            loadTeacherDetails(response.properties.studentid,response.properties.sessionid);
+            //loadTeacherDetails(response.properties.studentid,response.properties.sessionid);
             var u = SETTING.Users;
             u.attr('userId',response.userId);
             u.attr('name',response.name);
@@ -40,7 +41,7 @@
             u.attr('year',response.properties.year);
             u.attr('studentid',response.properties.studentid);         
         }
-   })
+   });
 })();
 
 function loadStudentProfile(studentId){
@@ -69,7 +70,7 @@ function loadStudentProfile(studentId){
           s.attr('contact',res.parentmobile);              
          //initializeContentController(res.rows[0].userid);
         }
-   })
+   });
 }
 
 function loadTeacherDetails(studentId,sessionid){

@@ -178,5 +178,8 @@ public interface URLMap {
     
     String CONTACT_ADMIN="master/cntadmn.do";
     
+    String SET_PARENT_RECENT_COMMENT="/parent/set-recent-updates-comment.do";
+    String SET_PARENT_RECENT_LIKE   ="/parent/set-recent-updates-like.do";
+    
 }
 

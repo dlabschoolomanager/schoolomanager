@@ -590,35 +590,7 @@ public class StudentDAO {
         return jsonUtil.getJsonObject(DaoUtil.executeQuery(conn, q, new Object[]{studentId}), 1,1, 15);
     }
 
-    public List<StudentActivity> getRecentUpdates(Connection conn, String studentId, Paging page,boolean self) {
-       List<StudentActivity> list=new ArrayList<StudentActivity>();
-       String sql = "SELECT id as commentid,title as subject,description as comment,createdon as timestamp, '' as username FROM notification"; 
-       int i=0;
-       while(i<5){
-           StudentActivity sa =new StudentActivity();
-           sa.setActivityType(1);
-           sa.setCommentId("12345");
-           sa.setComment("This is test");
-           sa.setSubject("This is Test");
-           sa.setTimestamp(new Date());
-           sa.setUserName("Suman Nag");
-           sa.setUserid("19e2e30f-9ada-41fa-95bd-c9d499b88fe2");
-           int j=0;
-           while(j<3){
-               Comment comment = new Comment();
-               comment.setComment("Test comment");
-               comment.setPostId("66666");
-               comment.setReplyId("12345");
-               comment.setUserId("rrrrrrrr");
-               comment.setTimeStamp(new Date().getTime());
-               sa.addPost(comment);
-               j++;
-           }
-            list.add(sa);
-           i++;
-       }
-       return list;
-       
-    }
+
+  
 }
     

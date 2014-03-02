@@ -238,5 +238,30 @@ public class ClassController {
         }
         return ""; 
      }
+   /* @RequestMapping(value=URLMap.GET_CLASS_EXAM, method= RequestMethod.GET)
+    @ResponseBody
+    public String getTeacherInClassList(@RequestParam("classid") String classid,
+                                        @RequestParam("sessionid") String sessionid)}{
+
+    
+SELECT scm.batch_id 
+  FROM student_class_map scm
+  JOIN sessions s ON s.batch_id= scm.batch_id AND s.session_id='00a24b9a-5bb2-4466-b629-f9d91de9e551'
+ WHERE student_id='4a65039d-8d25-4d22-9083-8b7a066fe1c1' 
+
+SELECT cst.subjectid ,
+       m.value AS SUBJECT ,
+       cst.teacherid ,
+       u.name , 
+       u.profilepic , 
+       u.contactno , 
+       u.address , 
+       u.emailid
+  FROM classsubjectteacher cst  
+  JOIN MASTER m ON m.id =  cst.subjectid
+  JOIN users  u ON u.userid=  cst.teacherid AND u.roleid=3
+ WHERE batchid='20ce22d9-dedc-43a3-b687-423b625c1e1b' 
+
+    }*/
     
 }

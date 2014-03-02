@@ -30,6 +30,23 @@ function addNotice(rec){
             url:'ppppp',
             formItems :[
             {
+                name : 'sessionid',
+                hidden:true,
+                id:'sessionid',
+                value:SETTING.Users.properties.session_id
+            },
+            {
+                name : 'createdby',
+                hidden:true,
+                id:'createdby',
+                value:SETTING.Users.userId
+            },{
+                name : 'modifiedby',
+                hidden:true,
+                id:'modifiedby',
+                value:SETTING.Users.userId
+            },
+            {
                 name : 'title',
                 fieldLabel: 'Notice Title',
                 id:'title'
@@ -99,7 +116,7 @@ function addNotice(rec){
 
 function saveNotice(btn){
     
-      var form = btn.up('window').down('form').getForm();
+     var form = btn.up('window').down('form').getForm();
      if(form.isValid()){
             var obj = form.getValues();
             
@@ -124,6 +141,50 @@ function saveNotice(btn){
                 }
             });
         }
+        /*----------*/
+             var   data={
+                    'refrenceid':'95498238-5358-4fd3-8369-8d94536622e9',
+                    'comment'  :'testing'
+                };
+                Ext.Ajax.request({
+                    url:'parent/set-recent-updates-comment.do',
+                    type:'json',
+                    headers:{
+                        'Content-Type':'application/json'
+                    },
+                    params:Ext.JSON.encode(data),
+                    success: function(res){
+                        var rec = eval('('+res.responseText+')');
+                        if(rec.admissionno!=null)
+                        Ext.Msg.alert('Success','Commented successfully');
+                        else
+                        Ext.Msg.alert('Success','Error Occured , Please Contact Administrator');    
+                     //   var rec = eval('('+res.responseText+')');
+                     //   app.getController('Class').getClassStore().add(rec);
+                    }
+                });
+                data={
+                    'refrenceid':'95498238-5358-4fd3-8369-8d94536622e9',
+                    'likeunlike':1
+                };
+                Ext.Ajax.request({
+                    url:'parent/set-recent-updates-like.do',
+                    type:'json',
+                    headers:{
+                        'Content-Type':'application/json'
+                    },
+                    params:Ext.JSON.encode(data),
+                    success: function(res){
+                        var rec = eval('('+res.responseText+')');
+                        if(rec.admissionno!=null)
+                        Ext.Msg.alert('Success','Liked successfully');
+                        else
+                        Ext.Msg.alert('Success','Error Occured , Please Contact Administrator');    
+                     //   var rec = eval('('+res.responseText+')');
+                     //   app.getController('Class').getClassStore().add(rec);
+                    }
+                });
+               /*----------*/ 
 }
 
 Ext.define('MyApp.view.notice.Notification' ,{

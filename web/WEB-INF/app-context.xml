@@ -85,6 +85,7 @@
   <bean id="teacherDAO" class="com.dlabs.mis.dao.TeacherDAO"></bean>
   <bean id="alertDAO" class="com.dlabs.mis.dao.AlertDAO"></bean>
   <bean id="hostelDAO" class="com.dlabs.mis.dao.HostelDAO"></bean>
+  <bean id="recentActivityDAO" class="com.dlabs.mis.dao.RecentActivityDAO"></bean>
 
  <bean id="attendanceDAO" class="com.dlabs.mis.dao.AttendanceDAO">
       <property name="sqlQueries" ref="sqlQueries"/>

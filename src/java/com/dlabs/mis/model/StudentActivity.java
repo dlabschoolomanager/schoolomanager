@@ -14,14 +14,42 @@ import java.util.List;
  */
 public class StudentActivity {
     public final static int DIGITAL_DIARY=1;
+    private String activityid;
     private int activityType;
+    private String activityname;
     private String commentId;
     private String subject;
     private String comment;
     private String userid;
     private String userName;
     private Date timestamp;
+    private String image;  
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+    
     private List<Comment> posts = new ArrayList<Comment>();
+
+    public String getActivityid() {
+        return activityid;
+    }
+
+    public void setActivityid(String activityid) {
+        this.activityid = activityid;
+    }
+    
+    public String getActivityname() {
+        return activityname;
+    }
+
+    public void setActivityname(String activityname) {
+        this.activityname = activityname;
+    }
     public int getActivityType() {
         return activityType;
     }
