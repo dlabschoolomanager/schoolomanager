@@ -293,39 +293,4 @@ public class TeacherDAO {
 
         return job;
     }
-
-    public Object getTeacherListForParentPageAsJson(Connection conn, String studid,
-                                                    String sessionid
-        ) throws ReadableException {
-        JSONObject job = null;
-        int count =0;
-        String batch_id= new GetBatch().getBatchId(conn, studid, sessionid);
-        String countquery= "SELECT count(1) as count " +
-                            "  FROM classsubjectteacher cst  " +
-                            "  JOIN MASTER m ON m.id =  cst.subjectid " +
-                            "  JOIN users  u ON u.userid=  cst.teacherid AND u.roleid=3 " +
-                            " WHERE batchid=?";
-        
-        String selectquery= "SELECT cst.subjectid ,m.value AS SUBJECT ,       cst.teacherid , " +
-                            "   u.profilepic,u.name , u.profilepic , u.contactno ,        u.address ,        u.emailid " +
-                            "  FROM classsubjectteacher cst  " +
-                            "  JOIN MASTER m ON m.id =  cst.subjectid " +
-                            "  JOIN users  u ON u.userid=  cst.teacherid AND u.roleid=3 " +
-                            " WHERE batchid=?";
-        
-        try{
-            ResultSet rs = DaoUtil.executeQuery(conn,countquery,new Object[]{batch_id});
-            
-            if(rs.next()) {
-                count = rs.getInt("count");
-            }
-            rs = DaoUtil.executeQuery(conn,selectquery,new Object[]{batch_id});
-            job = jsonUtil.getJsonObject(rs, count,0,15, false);
-        }
-        catch (SQLException ex) {
-            Logger.getLogger(MasterDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        return job;
-    }
 }
